@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mohamed Maamoun | IT Specialist</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Courier New', Courier, monospace;
+}
+
+body{
+    background:#0f172a;
+    color:#e5e7eb;
+    line-height:1.7;
+    overflow-x:hidden;
+    position:relative;
+}
+
+/* ===== TECH BACKGROUND ===== */
+#matrixCanvas{
+    position:fixed;
+    top:0; left:0;
+    width:100%;
+    height:100%;
+    z-index:-1;
+}
+
+/* ===== NEON HOVER LINES ===== */
+section:hover::before{
+    content:'';
+    position:absolute;
+    top:0; left:0;
+    width:100%;
+    height:100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0,255,255,0.05),
+        rgba(0,255,255,0.05) 2px,
+        transparent 2px,
+        transparent 4px
+    );
+    pointer-events:none;
+    z-index:0;
+    animation:neonMove 4s linear infinite;
+}
+@keyframes neonMove{
+    0%{background-position-y:0;}
+    100%{background-position-y:50px;}
+}
+
+/* ===== Scroll Animation ===== */
+.reveal{
+    opacity:0;
+    transform:translateY(40px);
+    transition:1s ease;
+    position:relative;
+    z-index:1;
+}
+.reveal.active{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* ===== HEADER ===== */
+header{
+    padding:80px 20px;
+    background:linear-gradient(135deg,#2563eb,#1e40af);
+}
+
+.header-content{
+    max-width:1000px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:30px;
+    flex-wrap:wrap;
+    text-align:center;
+}
+
+.profile-pic{
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    overflow:hidden;
+    border:4px solid #38bdf8;
+    animation:floatGlow 3s ease-in-out infinite;
+}
+.profile-pic img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+@keyframes floatGlow{
+    0%{transform:translateY(0px); box-shadow:0 0 15px #38bdf8;}
+    50%{transform:translateY(-10px); box-shadow:0 0 35px #60a5fa;}
+    100%{transform:translateY(0px); box-shadow:0 0 15px #38bdf8;}
+}
+
+.header-text h1{
+    font-size:42px;
+    letter-spacing:2px;
+    text-shadow:0 0 8px #38bdf8,0 0 20px #60a5fa;
+}
+
+.header-text p{
+    font-size:18px;
+    opacity:.9;
+}
+
+/* Contact Buttons */
+.contact-buttons{
+    margin-top:15px;
+}
+.contact-buttons a{
+    display:inline-block;
+    margin:5px;
+    padding:10px 20px;
+    border-radius:6px;
+    background:#2563eb;
+    color:white;
+    text-decoration:none;
+    transition:0.3s;
+    box-shadow:0 0 5px #38bdf8,0 0 15px #60a5fa;
+}
+.contact-buttons a:hover{
+    background:#1e40af;
+    box-shadow:0 0 15px #38bdf8,0 0 30px #60a5fa;
+}
+
+/* ===== SECTIONS ===== */
+section{
+    padding:60px 10%;
+    position:relative;
+}
+
+h2{
+    font-size:28px;
+    margin-bottom:20px;
+    color:#38bdf8;
+    text-shadow:0 0 8px #38bdf8, 0 0 20px #60a5fa;
+    border-left:4px solid #38bdf8;
+    padding-left:12px;
+}
+
+/* ABOUT */
+.about p{
+    max-width:850px;
+}
+
+/* SKILLS */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:#020617;
+    padding:25px;
+    border-radius:12px;
+    text-align:center;
+    border:1px solid #1e293b;
+    transition:.4s;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    justify-content:center;
+    box-shadow:0 0 5px #38bdf8, 0 0 10px #60a5fa;
+}
+
+.card:hover{
+    transform:translateY(-10px) scale(1.05);
+    border-color:#38bdf8;
+    box-shadow:0 0 20px #38bdf8, 0 0 40px #60a5fa;
+}
+
+.skill-icon{
+    margin-right:8px;
+    color:#38bdf8;
+    text-shadow:0 0 6px #38bdf8, 0 0 12px #60a5fa;
+    transition:0.3s;
+}
+
+.card:hover .skill-icon{
+    color:#60a5fa;
+    text-shadow:0 0 12px #38bdf8, 0 0 25px #60a5fa;
+}
+
+/* EXPERIENCE */
+.timeline{
+    position:relative;
+    padding-left:30px;
+}
+.timeline::before{
+    content:'';
+    position:absolute;
+    left:10px;
+    top:0;
+    width:4px;
+    height:100%;
+    background:#2563eb;
+}
+.timeline div{
+    background:#020617;
+    margin-bottom:25px;
+    padding:20px;
+    border-radius:10px;
+    border-left:4px solid #2563eb;
+    position:relative;
+}
+.timeline div::before{
+    content:'';
+    position:absolute;
+    left:-14px;
+    top:20px;
+    width:10px; height:10px;
+    background:#38bdf8;
+    border-radius:50%;
+    box-shadow:0 0 10px #38bdf8;
+}
+.timeline h3{
+    color:#60a5fa;
+}
+.timeline span{
+    font-size:14px;
+    color:#94a3b8;
+}
+
+/* CERTIFICATIONS */
+.certs ul{
+    list-style:none;
+}
+.certs li{
+    background:#020617;
+    margin-bottom:10px;
+    padding:15px;
+    border-radius:8px;
+    border-left:4px solid #22d3ee;
+}
+
+/* PROJECTS */
+.projects-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+    position:relative;
+}
+.project-card{
+    background:#020617;
+    padding:20px;
+    border-radius:12px;
+    border:1px solid #1e293b;
+    transition:.4s;
+    position:relative;
+    box-shadow:0 0 5px #38bdf8, 0 0 10px #60a5fa;
+}
+.project-card:hover{
+    transform:translateY(-8px) scale(1.02);
+    border-color:#38bdf8;
+    box-shadow:0 0 20px #38bdf8, 0 0 40px #60a5fa;
+}
+.project-card::after{
+    content:'';
+    position:absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(255,255,255,0.02),
+        rgba(255,255,255,0.02) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    border-radius:12px;
+    pointer-events:none;
+}
+
+/* FOOTER */
+footer{
+    background:#020617;
+    text-align:center;
+    padding:30px;
+    font-size:14px;
+    color:#38bdf8;
+    position:relative;
+    z-index:1;
+}
+
+footer p{
+    margin:5px 0;
+    color:#38bdf8;
+    text-shadow: 0 0 6px #38bdf8, 0 0 12px #60a5fa;
+    transition:0.3s;
+}
+
+footer:hover p{
+    color:#0ff;
+    text-shadow:0 0 12px #38bdf8, 0 0 25px #60a5fa, 0 0 35px #22d3ee;
+}
+
+footer::before{
+    content:'';
+    position:absolute;
+    top:0; left:0;
+    width:100%;
+    height:100%;
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(0,255,255,0.05),
+        rgba(0,255,255,0.05) 2px,
+        transparent 2px,
+        transparent 4px
+    );
+    pointer-events:none;
+    z-index:0;
+    animation:footerLines 6s linear infinite;
+}
+
+@keyframes footerLines{
+    0%{background-position:0 0;}
+    100%{background-position:50px 50px;}
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+    section{
+        padding:40px 6%;
+    }
+    .header-text h1{
+        font-size:32px;
+    }
+    .profile-pic{
+        width:120px;
+        height:120px;
+    }
+}
+@media(max-width:500px){
+    .header-content{
+        flex-direction:column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="matrixCanvas"></canvas>
+
+<header class="reveal">
+    <div class="header-content">
+        <div class="profile-pic">
+            <img src="profile.jpg" alt="Mohamed Maamoun">
+        </div>
+        <div class="header-text">
+            <h1>Mohamed Maamoun</h1>
+            <p>IT Manager | IT Specialist | Technical Trainer</p>
+            <div class="contact-buttons">
+                <a href="mailto:m.maamoun124@gmail.com">Email Me</a>
+                <a href="https://www.linkedin.com/in/mohamed-maamoun/" target="_blank">LinkedIn</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="about reveal">
+    <h2>About Me</h2>
+    <p>
+        IT professional with strong experience in IT infrastructure, server administration,
+        virtualization, networking, and cybersecurity. Currently working as an IT Manager
+        in the hospitality sector and a certified technical trainer.
+    </p>
+</section>
+
+<section class="skills reveal">
+    <h2>Technical Skills</h2>
+    <div class="grid">
+        <div class="card reveal"><i class="fa-brands fa-windows fa-lg skill-icon"></i> Windows Server & Backup</div>
+        <div class="card reveal"><i class="fa-brands fa-vmware fa-lg skill-icon"></i> VMware & VxRail</div>
+        <div class="card reveal"><i class="fa-solid fa-network-wired fa-lg skill-icon"></i> Network Configuration</div>
+        <div class="card reveal"><i class="fa-solid fa-shield-alt fa-lg skill-icon"></i> Cybersecurity Awareness</div>
+        <div class="card reveal"><i class="fa-brands fa-python fa-lg skill-icon"></i> Python, HTML, CSS, JavaScript</div>
+        <div class="card reveal"><i class="fa-solid fa-chalkboard-teacher fa-lg skill-icon"></i> IT Training & Mentorship</div>
+    </div>
+</section>
+
+<section class="experience reveal">
+    <h2>Experience</h2>
+    <div class="timeline">
+        <div class="reveal">
+            <h3>IT Manager – Etap Luxor Hotel</h3>
+            <span>2025 – Present</span>
+            <p>Managing full IT operations, infrastructure, security, and hotel systems.</p>
+        </div>
+        <div class="reveal">
+            <h3>IT Specialist – Water & Wastewater Company</h3>
+            <span>2023 – Present</span>
+            <p>Server administration, virtualization, networking, and technical support.</p>
+        </div>
+        <div class="reveal">
+            <h3>Programming Trainer – Apex Academy</h3>
+            <span>2024 – Present</span>
+            <p>Teaching Python, Web Development, and IT fundamentals.</p>
+        </div>
+    </div>
+</section>
+
+<section class="certs reveal">
+    <h2>Courses & Certifications</h2>
+    <ul>
+        <li class="reveal">AI for Business Professionals</li>
+        <li class="reveal">Data Science & Analytics</li>
+        <li class="reveal">Agile Project Management</li>
+        <li class="reveal">Cybersecurity Awareness</li>
+        <li class="reveal">Digital Business Skills</li>
+        <li class="reveal">Customer Experience (CX)</li>
+        <li class="reveal">Cloud Computing Fundamentals</li>
+        <li class="reveal">DevOps Essentials</li>
+        <li class="reveal">Networking & Security Advanced</li>
+        <li class="reveal">ICDL – HTML and CSS</li>
+        <li class="reveal">ICDL – Excel 2019, Access 2019, PowerPoint 2019, Word</li>
+        <li class="reveal">Data Structure</li>
+        <li class="reveal">Soft Skills Program (Communication Skills, Body Language, Time Management)</li>
+        <li class="reveal">TOT – Apex Company</li>
+        <li class="reveal">Python</li>
+    </ul>
+</section>
+
+<section class="projects reveal">
+    <h2>Projects</h2>
+    <div class="projects-grid">
+        <div class="project-card reveal">
+            <h3>Hotel IT System Upgrade</h3>
+            <p>Implemented full server and network upgrade at Etap Luxor Hotel, improving efficiency by 35%.</p>
+        </div>
+        <div class="project-card reveal">
+            <h3>Python Automation Scripts</h3>
+            <p>Developed automation scripts to manage IT tasks and reporting, saving 10 hours/week.</p>
+        </div>
+        <div class="project-card reveal">
+            <h3>Virtualization Deployment</h3>
+            <p>Configured VMware & VxRail for Water & Wastewater Company servers to optimize resource usage.</p>
+        </div>
+    </div>
+</section>
+
+<footer class="reveal">
+    <p>📧 m.maamoun124@gmail.com | 📍 Luxor, Egypt</p>
+    <p>💻 Designed & Developed by Mohamed Maamoun</p>
+    <p>IT Specialist | Technical Trainer | Interface Designer</p>
+</footer>
+
+<script>
+// Scroll Reveal
+window.addEventListener("scroll", reveal);
+function reveal(){
+    let elements = document.querySelectorAll(".reveal");
+    for(let i=0;i<elements.length;i++){
+        let windowHeight = window.innerHeight;
+        let elementTop = elements[i].getBoundingClientRect().top;
+        if(elementTop < windowHeight - 100){
+            elements[i].classList.add("active");
+        }
+    }
+}
+reveal();
+
+// TECH BACKGROUND
+const canvas = document.getElementById('matrixCanvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const gridSpacing = 80;
+const lineSpeed = 0.3;
+const particles = [];
+for(let i=0;i<120;i++){
+    particles.push({
+        x: Math.random()*canvas.width,
+        y: Math.random()*canvas.height,
+        r: Math.random()*2+1,
+        speed: Math.random()*0.4+0.1
+    });
+}
+
+const neonLines = [];
+for(let i=0;i<5;i++){
+    neonLines.push({
+        y: Math.random()*canvas.height,
+        speed: 0.5 + Math.random()*0.3
+    });
+}
+
+let offset = 0;
+function drawTechBackground(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    // Grid Lines
+    ctx.strokeStyle = 'rgba(56,189,248,0.15)';
+    ctx.lineWidth = 1;
+    for(let x=0;x<canvas.width;x+=gridSpacing){
+        ctx.beginPath();
+        ctx.moveTo(x,0);
+        ctx.lineTo(x,canvas.height);
+        ctx.stroke();
+    }
+    for(let y=0;y<canvas.height;y+=gridSpacing){
+        ctx.beginPath();
+        ctx.moveTo(0,y+offset);
+        ctx.lineTo(canvas.width,y+offset);
+        ctx.stroke();
+    }
+    offset += lineSpeed;
+    if(offset>gridSpacing) offset=0;
+
+    // Particles
+    ctx.fillStyle = '#0ff';
+    particles.forEach(p=>{
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fill();
+        p.y -= p.speed;
+        if(p.y<0)p.y=canvas.height;
+    });
+
+    // Neon Moving Lines
+    neonLines.forEach(line=>{
+        ctx.strokeStyle = 'rgba(0,255,255,0.15)';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(0,line.y);
+        ctx.lineTo(canvas.width,line.y);
+        ctx.stroke();
+        line.y += line.speed;
+        if(line.y > canvas.height) line.y = 0;
+    });
+
+    requestAnimationFrame(drawTechBackground);
+}
+drawTechBackground();
+
+window.addEventListener('resize',()=>{
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
+</script>
+
+</body>
+</html>
