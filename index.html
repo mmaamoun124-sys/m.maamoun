@@ -66,30 +66,9 @@ section:hover::before{
     transform:translateY(0);
 }
 
-/* ===== NAVBAR ===== */
-nav{
-    position:fixed;
-    top:0;
-    width:100%;
-    background:rgba(15,23,42,0.95);
-    padding:10px 0;
-    z-index:10;
-    text-align:center;
-}
-nav a{
-    margin:0 15px;
-    color:#38bdf8;
-    text-decoration:none;
-    font-weight:bold;
-    transition:0.3s;
-}
-nav a:hover{
-    color:#0ff;
-}
-
 /* ===== HEADER ===== */
 header{
-    padding:120px 20px 80px 20px; /* زودت padding عشان Navbar */
+    padding:80px 20px;
     background:linear-gradient(135deg,#2563eb,#1e40af);
 }
 
@@ -374,15 +353,6 @@ footer::before{
 
 <canvas id="matrixCanvas"></canvas>
 
-<nav>
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#experience">Experience</a>
-    <a href="#certs">Certifications</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
-</nav>
-
 <header class="reveal">
     <div class="header-content">
         <div class="profile-pic">
@@ -394,33 +364,33 @@ footer::before{
             <div class="contact-buttons">
                 <a href="mailto:m.maamoun124@gmail.com">Email Me</a>
                 <a href="https://www.linkedin.com/in/mohamed-maamoun-27a2b32a4" target="_blank">LinkedIn</a>
-                <a href="https://github.com/username" target="_blank">GitHub</a>
             </div>
         </div>
     </div>
 </header>
 
-<section class="about reveal" id="about">
+<section class="about reveal">
     <h2>About Me</h2>
     <p>
-        I am Mohamed Maamoun, an IT Specialist and Technical Trainer with extensive experience in IT infrastructure, server management, and cybersecurity. 
-        I aim to deliver efficient IT solutions and mentor future professionals to succeed in technology.
+        IT professional with strong experience in IT infrastructure, server administration,
+        virtualization, networking, and cybersecurity. Currently working as an IT Manager
+        in the hospitality sector and a certified technical trainer.
     </p>
 </section>
 
-<section class="skills reveal" id="skills">
+<section class="skills reveal">
     <h2>Technical Skills</h2>
     <div class="grid">
-        <div class="card reveal"><i class="fa-brands fa-windows fa-lg skill-icon"></i> <strong>Windows Server & Backup</strong></div>
-        <div class="card reveal"><i class="fa-brands fa-vmware fa-lg skill-icon"></i> <strong>VMware & VxRail</strong></div>
-        <div class="card reveal"><i class="fa-solid fa-network-wired fa-lg skill-icon"></i> <strong>Network Configuration</strong></div>
-        <div class="card reveal"><i class="fa-solid fa-shield-alt fa-lg skill-icon"></i> <strong>Cybersecurity Awareness</strong></div>
-        <div class="card reveal"><i class="fa-brands fa-python fa-lg skill-icon"></i> <strong>Python, HTML, CSS, JavaScript</strong></div>
-        <div class="card reveal"><i class="fa-solid fa-chalkboard-teacher fa-lg skill-icon"></i> <strong>IT Training & Mentorship</strong></div>
+        <div class="card reveal"><i class="fa-brands fa-windows fa-lg skill-icon"></i> Windows Server & Backup</div>
+        <div class="card reveal"><i class="fa-brands fa-vmware fa-lg skill-icon"></i> VMware & VxRail</div>
+        <div class="card reveal"><i class="fa-solid fa-network-wired fa-lg skill-icon"></i> Network Configuration</div>
+        <div class="card reveal"><i class="fa-solid fa-shield-alt fa-lg skill-icon"></i> Cybersecurity Awareness</div>
+        <div class="card reveal"><i class="fa-brands fa-python fa-lg skill-icon"></i> Python, HTML, CSS, JavaScript</div>
+        <div class="card reveal"><i class="fa-solid fa-chalkboard-teacher fa-lg skill-icon"></i> IT Training & Mentorship</div>
     </div>
 </section>
 
-<section class="experience reveal" id="experience">
+<section class="experience reveal">
     <h2>Experience</h2>
     <div class="timeline">
         <div class="reveal">
@@ -441,7 +411,7 @@ footer::before{
     </div>
 </section>
 
-<section class="certs reveal" id="certs">
+<section class="certs reveal">
     <h2>Courses & Certifications</h2>
     <ul>
         <li class="reveal">AI for Business Professionals</li>
@@ -462,7 +432,7 @@ footer::before{
     </ul>
 </section>
 
-<section class="projects reveal" id="projects">
+<section class="projects reveal">
     <h2>Projects</h2>
     <div class="projects-grid">
         <div class="project-card reveal">
@@ -480,7 +450,7 @@ footer::before{
     </div>
 </section>
 
-<footer class="reveal" id="contact">
+<footer class="reveal">
     <p>📧 m.maamoun124@gmail.com | 📍 Luxor, Egypt</p>
     <p>💻 Designed & Developed by Mohamed Maamoun</p>
     <p>IT Specialist | Technical Trainer | Interface Designer</p>
@@ -547,4 +517,39 @@ function drawTechBackground(){
         ctx.stroke();
     }
     offset += lineSpeed;
-    if(offset>gridSpacing
+    if(offset>gridSpacing) offset=0;
+
+    // Particles
+    ctx.fillStyle = '#0ff';
+    particles.forEach(p=>{
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fill();
+        p.y -= p.speed;
+        if(p.y<0)p.y=canvas.height;
+    });
+
+    // Neon Moving Lines
+    neonLines.forEach(line=>{
+        ctx.strokeStyle = 'rgba(0,255,255,0.15)';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(0,line.y);
+        ctx.lineTo(canvas.width,line.y);
+        ctx.stroke();
+        line.y += line.speed;
+        if(line.y > canvas.height) line.y = 0;
+    });
+
+    requestAnimationFrame(drawTechBackground);
+}
+drawTechBackground();
+
+window.addEventListener('resize',()=>{
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
+</script>
+
+</body>
+</html>
